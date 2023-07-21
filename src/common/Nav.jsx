@@ -1,4 +1,5 @@
 import LightDark from "./LightDark";
+import { Link } from "react-router-dom";
 
 export default function Foo() {
     return (
@@ -9,13 +10,13 @@ export default function Foo() {
         >
           <div className="relative md:flex md:items-center md:justify-between">
             <div className="flex items-center justify-between">
-              <a
+              <Link
                 className="flex-none text-xl font-semibold dark:text-white"
-                href="#"
+                to="#"
                 aria-label="Brand"
               >
-                Brand
-              </a>
+                Project HLZ
+              </Link>
               <div className="md:hidden">
                 <button
                   type="button"
@@ -54,19 +55,19 @@ export default function Foo() {
             >
               <div className="overflow-hidden overflow-y-auto max-h-[75vh] scrollbar-y">
                 <div className="flex flex-col gap-x-0 mt-5 divide-y divide-dashed divide-gray-200 md:flex-row md:items-center md:justify-end md:gap-x-7 md:mt-0 md:pl-7 md:divide-y-0 md:divide-solid dark:divide-gray-700">
-                  <a
+                  <Link
                     className="font-medium text-blue-600 py-3 md:py-6 dark:text-blue-500"
-                    href="#"
+                    to="#"
                     aria-current="page"
                   >
                     Landing
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     className="font-medium text-gray-500 hover:text-gray-400 py-3 md:py-6 dark:text-gray-400 dark:hover:text-gray-500"
-                    href="#"
+                    to="#"
                   >
                     Company
-                  </a>
+                  </Link>
                   <div className="hs-dropdown [--strategy:static] md:[--strategy:absolute] [--adaptive:none] md:[--trigger:hover] py-3 md:py-4">
                     <button
                       type="button"
@@ -92,9 +93,9 @@ export default function Foo() {
                     <div className="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] md:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 w-full hidden z-10 top-full left-0 min-w-[15rem] bg-white md:shadow-2xl rounded-lg py-2 md:p-4 dark:bg-gray-800 dark:divide-gray-700 before:absolute before:-top-5 before:left-0 before:w-full before:h-5">
                       <div className="md:grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <div className="flex flex-col mx-1 md:mx-0">
-                          <a
+                          <Link
                             className="group flex gap-x-5 text-gray-800 hover:bg-gray-100 rounded-md p-4 dark:text-gray-200 dark:hover:bg-gray-900"
-                            href="#"
+                            to="#"
                           >
                             <svg
                               className="flex-shrink-0 w-6 h-6 mt-1"
@@ -115,10 +116,10 @@ export default function Foo() {
                                 features.
                               </p>
                             </div>
-                          </a>
-                          <a
+                          </Link>
+                          <Link
                             className="group flex gap-x-5 text-gray-800 hover:bg-gray-100 rounded-md p-4 dark:text-gray-200 dark:hover:bg-gray-900"
-                            href="#"
+                            to="#"
                           >
                             <svg
                               className="flex-shrink-0 w-6 h-6 mt-1"
@@ -139,10 +140,10 @@ export default function Foo() {
                                 integrates with.
                               </p>
                             </div>
-                          </a>
-                          <a
+                          </Link>
+                          <Link
                             className="group flex gap-x-5 text-gray-800 hover:bg-gray-100 rounded-md p-4 dark:text-gray-200 dark:hover:bg-gray-900"
-                            href="#"
+                            to="#"
                           >
                             <svg
                               className="flex-shrink-0 w-6 h-6 mt-1"
@@ -163,12 +164,12 @@ export default function Foo() {
                                 Build custom integrations with our first-class API.
                               </p>
                             </div>
-                          </a>
+                          </Link>
                         </div>
                         <div className="flex flex-col mx-1 md:mx-0">
-                          <a
+                          <Link
                             className="group flex gap-x-5 text-gray-800 hover:bg-gray-100 rounded-md p-4 dark:text-gray-200 dark:hover:bg-gray-900"
-                            href="#"
+                            to="#"
                           >
                             <svg
                               className="flex-shrink-0 w-6 h-6 mt-1"
@@ -189,10 +190,10 @@ export default function Foo() {
                                 Learn how to install, set up, and use Preline.
                               </p>
                             </div>
-                          </a>
-                          <a
+                          </Link>
+                          <Link
                             className="group flex gap-x-5 text-gray-800 hover:bg-gray-100 rounded-md p-4 dark:text-gray-200 dark:hover:bg-gray-900"
-                            href="#"
+                            to="#"
                           >
                             <svg
                               className="flex-shrink-0 w-6 h-6 mt-1"
@@ -212,10 +213,10 @@ export default function Foo() {
                                 Learn how to integrate or build on top of Preline.
                               </p>
                             </div>
-                          </a>
-                          <a
+                          </Link>
+                          <Link
                             className="group flex gap-x-5 text-gray-800 hover:bg-gray-100 rounded-md p-4 dark:text-gray-200 dark:hover:bg-gray-900"
-                            href="#"
+                            to="#"
                           >
                             <svg
                               className="flex-shrink-0 w-6 h-6 mt-1"
@@ -235,15 +236,15 @@ export default function Foo() {
                                 Learn, share, and connect with other Preline users.
                               </p>
                             </div>
-                          </a>
+                          </Link>
                         </div>
                         <div className="flex flex-col pt-4 md:pt-0 mx-1 md:mx-0">
                           <span className="text-sm font-semibold uppercase text-gray-800 dark:text-gray-200">
                             Customer stories
                           </span>
-                          <a
+                          <Link
                             className="mt-4 group flex gap-x-5 items-center"
-                            href="#"
+                            to="#"
                           >
                             <img
                               className="w-32 h-32 rounded-lg"
@@ -274,25 +275,25 @@ export default function Foo() {
                                 </svg>
                               </p>
                             </div>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <a
+                  <Link
                     className="font-medium text-gray-500 hover:text-gray-400 py-3 md:py-6 dark:text-gray-400 dark:hover:text-gray-500"
-                    href="#"
+                    to="#"
                   >
                     Join us{" "}
                     <span className="py-0.5 px-1.5 rounded-full text-xs font-medium bg-blue-50 border border-blue-200 text-blue-600">
                       4
                     </span>
-                  </a>
+                  </Link>
                   <LightDark/>
                   <div className="pt-3 md:pt-0">
-                    <a
+                    <Link
                       className="inline-flex justify-center items-center gap-x-2 text-center bg-blue-600 hover:bg-blue-700 border border-transparent text-white text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition py-2.5 px-3 dark:focus:ring-offset-gray-800"
-                      href="#"
+                      to="#"
                     >
                       <svg
                         className="w-4 h-4"
@@ -305,7 +306,7 @@ export default function Foo() {
                         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                       </svg>
                       Log in
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
