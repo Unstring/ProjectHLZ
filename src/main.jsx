@@ -1,11 +1,50 @@
-import React from 'react'
+// import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
 import './index.css'
 import('preline')
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+
+import List from './List.jsx'
+import Details from './Details.jsx'
+import Nav from './common/Nav'
+import Foot from './common/Foot'
+
+
+const AppLayout = () => {
+  return (
+    <div>
+      <Nav />
+      <Outlet />
+      <Foot />
+    </div>
+  );
+};
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    children: [
+      {
+        path: "/",
+        element: <List />,
+      },
+      {
+        path: "/details",
+        element: <Details />,
+      },
+    ],
+  },
+]);
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+    <RouterProvider router={router} />
+);
+
+// ReactDOM.createRoot(document.getElementById('root')).render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>,
+// )
