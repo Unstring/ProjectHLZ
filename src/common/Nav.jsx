@@ -2,7 +2,7 @@ import LightDark from "./LightDark";
 
 export default function Foo() {
     return (
-        <header className="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full bg-white text-sm py-3 md:py-0 dark:bg-gray-800">
+        <header className="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full bg-white text-sm py-3 md:py-0 dark:bg-gray-900">
         <nav
           className="max-w-[85rem] w-full mx-auto px-4 md:px-6 lg:px-8"
           aria-label="Global"
