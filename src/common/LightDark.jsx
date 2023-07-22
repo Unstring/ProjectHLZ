@@ -104,7 +104,6 @@ const DarkLight = () => {
       <a
         className="hs-dark-mode-active:hidden block hs-dark-mode group flex items-center text-gray-600 hover:text-blue-600 font-medium dark:text-gray-400 dark:hover:text-gray-500"
         data-hs-theme-click-value="dark"
-        href="javascript:;"
       >
         <svg
           className="w-4 h-4"
@@ -120,7 +119,7 @@ const DarkLight = () => {
       <a
         className="hs-dark-mode-active:block hidden hs-dark-mode group flex items-center text-gray-600 hover:text-blue-600 font-medium dark:text-gray-400 dark:hover:text-gray-500"
         data-hs-theme-click-value="light"
-        href="javascript:;"
+        // href="javascript:;"
       >
         <svg
           className="w-4 h-4"

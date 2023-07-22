@@ -1,4 +1,11 @@
+import { useState } from "react";
 export default function TableHeader(props) {
+
+
+  const [searchTerm, setSearchTerm] = useState('');
+
+
+
   // Function to get the previous date from the given input date
   function getPreviousDate(inputDate) {
     const currentDate = new Date(inputDate);
@@ -52,6 +59,31 @@ function prevHandler() {
   props.setUrl(nurl)
 }
 
+function applyFilters(searchInput) {
+  let filtered = [];
+  if (props.data && props.data.length > 0) {
+    let Alldata = [...props.data];
+    if (searchInput) {
+      const searchTerm = searchInput.toLowerCase().trim();
+      filtered = Alldata.filter(
+        (e) =>
+        e.japaParticipants.name.toLowerCase().includes(searchTerm)
+        // console.log(e.japaParticipants.name.toLowerCase())
+        // console.log(searchTerm)
+        );
+      }else{
+        filtered = Alldata;
+      }
+      // console.log(filtered)
+      props.setFilteredData(filtered)
+    }
+}
+
+function handleSearch(event) {
+  setSearchTerm(event.target.value)
+  applyFilters(event.target.value)
+}
+
   return (
     <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-700">
       {/* Input */}
@@ -66,6 +98,9 @@ function prevHandler() {
             name="hs-as-table-product-review-search"
             className="py-2 px-3 pl-11 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
             placeholder="Search"
+            onChange={handleSearch}
+            value={searchTerm}
+
           />
           <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none pl-4">
             <svg
@@ -106,6 +141,7 @@ function prevHandler() {
                 </svg>
                 Prev Date
               </button>
+              {getTodayDateInFormat() == props.url.split("=")[1] ? (<></>):(
               <button
                 type="button"
                 className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
@@ -127,6 +163,7 @@ function prevHandler() {
                   />
                 </svg>
               </button>
+              )}
             </div>
           </div>
           {/* <div className="hs-dropdown relative inline-block [--placement:bottom-right]">
@@ -326,5 +363,5 @@ function prevHandler() {
         </div>
       </div>
     </div>
-  );
+  )
 }
