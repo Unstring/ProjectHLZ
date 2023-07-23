@@ -49,6 +49,7 @@ function nextHandler() {
   let nurl = purl + "=" + getNextDate(date)
   props.fetchData(nurl);
   props.setUrl(nurl)
+  props.setIsUpdated(true)
 }
 function prevHandler() {
   props.setData([])
@@ -57,6 +58,7 @@ function prevHandler() {
   let nurl = purl + "=" + getPreviousDate(date)
   props.fetchData(nurl);
   props.setUrl(nurl)
+  props.setIsUpdated(true)
 }
 
 function applyFilters(searchInput) {

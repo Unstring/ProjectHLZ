@@ -4,111 +4,125 @@ import axios from "axios";
 
 import TableHeader from "./Components/TableHeader";
 
-function Dummy() {
+function NotUpdated() {
   let date = new Date();
   let month = date.getMonth() > 9 ? date.getMonth() : "0" + date.getMonth();
   let day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
   let today = date.getFullYear() + "-" + month + "-" + day;
   // console.log(date.getDate().length);
   return (
-    <tr>
-      {/* <td className="h-px w-px whitespace-nowrap">
-        <div className="pl-6 py-3">
-          <label htmlFor="hs-at-with-checkboxes-1" className="flex">
-                        <input
-                          type="checkbox"
-                          className="shrink-0 border-gray-200 rounded text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                          id="hs-at-with-checkboxes-1"
-                        />
-                        <span className="sr-only">Checkbox</span>
-                      </label>
+    // <tr>
+    //   <td className="h-px w-px whitespace-nowrap">
+    //     <div className="pl-6 lg:pl-3 xl:pl-0 pr-6 py-3">
+    //       <div className="flex items-center gap-x-3">
+    //         <img
+    //           className="inline-block h-[2.375rem] w-[2.375rem] rounded-full"
+    //           src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80"
+    //           alt="Image Description"
+    //         />
+    //         <div className="grow">
+    //           <span className="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+    //             First Lastname{" "}
+    //           </span>
+    //           <span className="block text-sm text-gray-500">
+    //             firstname@some.where
+    //           </span>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </td>
+    //   <td className="h-px w-72 whitespace-nowrap">
+    //     <div className="px-6 py-3">
+    //       <span className="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+    //         Senior Prabhu
+    //       </span>
+    //       <span className="block text-sm text-gray-500">
+    //         senior@haldia.passout
+    //       </span>
+    //     </div>
+    //   </td>
+    //   <td className="h-px w-px whitespace-nowrap">
+    //     <div className="px-6 py-3">
+    //       <span className="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+    //         <svg
+    //           className="w-2.5 h-2.5"
+    //           xmlns="http://www.w3.org/2000/svg"
+    //           width={16}
+    //           height={16}
+    //           fill="currentColor"
+    //           viewBox="0 0 16 16"
+    //         >
+    //           <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+    //         </svg>
+    //         <span>Status</span>
+    //       </span>
+    //     </div>
+    //   </td>
+    //   <td className="h-px w-px whitespace-nowrap">
+    //     <div className="px-6 py-3">
+    //       <div className="flex items-center gap-x-3">
+    //         <span className="text-xs text-gray-500"></span>
+    //         <div className="flex w-full h-1.5 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700">
+    //           <div
+    //             className="flex flex-col justify-center overflow-hidden bg-gray-800 dark:bg-gray-200"
+    //             role="progressbar"
+    //             style={{
+    //               width: (10 / 12) * Math.floor(Math.random() * 100) + "%",
+    //             }}
+    //             aria-valuenow={100}
+    //             aria-valuemin={0}
+    //             aria-valuemax={120}
+    //           />
+    //         </div>
+    //       </div>
+    //       <span className="ml-3 align-middle text-sm text-gray-500">
+    //         00 hours 00 minutes
+    //       </span>
+    //     </div>
+    //   </td>
+    //   <td className="h-px w-px whitespace-nowrap">
+    //     <div className="px-6 py-3">
+    //       <span className="text-sm text-gray-500">{today}</span>
+    //     </div>
+    //   </td>
+    //   <td className="h-px w-px whitespace-nowrap">
+    //     <div className="px-6 py-1.5">
+    //       <div
+    //         className="inline-flex items-center gap-x-1.5 text-sm text-gray-600 decoration-2 hover:underline font-medium"
+    //         href="#"
+    //       >
+    //         Details
+    //       </div>
+    //     </div>
+    //   </td>
+    // </tr>
+    <>
+      <div className="grow my-36">
+        {" "}
+        <span className="block text-sm font-semibold text-gray-800 text-center dark:text-gray-200">
+          {" "}
+          Data not updated till now{" "}
+        </span>{" "}
+      </div>
+    </>
+  );
+}
+
+function Simmer(props) {
+  return (
+    <>
+      <div className="grow my-36">
+        <span className="block text-sm font-semibold text-gray-800 text-center dark:text-gray-200">
+        <div
+          className="animate-spin inline-block w-8 h-8 border-[3px] border-current border-t-transparent text-blue-600 rounded-full"
+          role="status"
+          aria-label="loading"
+        >
+          <span className="sr-only">Loading...</span>
         </div>
-      </td> */}
-      <td className="h-px w-px whitespace-nowrap">
-        <div className="pl-6 lg:pl-3 xl:pl-0 pr-6 py-3">
-          <div className="flex items-center gap-x-3">
-            <img
-              className="inline-block h-[2.375rem] w-[2.375rem] rounded-full"
-              src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80"
-              alt="Image Description"
-            />
-            <div className="grow">
-              <span className="block text-sm font-semibold text-gray-800 dark:text-gray-200">
-                First Lastname{" "}
-              </span>
-              <span className="block text-sm text-gray-500">
-                firstname@some.where
-              </span>
-            </div>
-          </div>
-        </div>
-      </td>
-      <td className="h-px w-72 whitespace-nowrap">
-        <div className="px-6 py-3">
-          <span className="block text-sm font-semibold text-gray-800 dark:text-gray-200">
-            Senior Prabhu
-          </span>
-          <span className="block text-sm text-gray-500">
-            senior@haldia.passout
-          </span>
-        </div>
-      </td>
-      <td className="h-px w-px whitespace-nowrap">
-        <div className="px-6 py-3">
-          <span className="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
-            <svg
-              className="w-2.5 h-2.5"
-              xmlns="http://www.w3.org/2000/svg"
-              width={16}
-              height={16}
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-            </svg>
-            <span>Status</span>
-          </span>
-        </div>
-      </td>
-      <td className="h-px w-px whitespace-nowrap">
-        <div className="px-6 py-3">
-          <div className="flex items-center gap-x-3">
-            <span className="text-xs text-gray-500"></span>
-            <div className="flex w-full h-1.5 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700">
-              <div
-                className="flex flex-col justify-center overflow-hidden bg-gray-800 dark:bg-gray-200"
-                role="progressbar"
-                style={{
-                  width: (10 / 12) * Math.floor(Math.random() * 100) + "%",
-                }}
-                aria-valuenow={100}
-                aria-valuemin={0}
-                aria-valuemax={120}
-              />
-              {/* {console.log(props.data)} */}
-            </div>
-          </div>
-          <span className="ml-3 align-middle text-sm text-gray-500">
-            00 hours 00 minutes
-          </span>
-        </div>
-      </td>
-      <td className="h-px w-px whitespace-nowrap">
-        <div className="px-6 py-3">
-          <span className="text-sm text-gray-500">{today}</span>
-        </div>
-      </td>
-      <td className="h-px w-px whitespace-nowrap">
-        <div className="px-6 py-1.5">
-          <div
-            className="inline-flex items-center gap-x-1.5 text-sm text-gray-600 decoration-2 hover:underline font-medium"
-            href="#"
-          >
-            Details
-          </div>
-        </div>
-      </td>
-    </tr>
+        </span>
+      </div>
+    </>
   );
 }
 
@@ -147,7 +161,7 @@ function Rows(props) {
             </div>
           </div>
         </td>
-        <td className="h-px w-72 whitespace-nowrap">
+        <td className="h-px w-72 hidden lg:table-cell whitespace-nowrap">
           <div className="px-6 py-3">
             <span className="block text-sm font-semibold text-gray-800 dark:text-gray-200">
               Senior Prabhu
@@ -157,7 +171,7 @@ function Rows(props) {
             </span>
           </div>
         </td>
-        <td className="h-px w-px whitespace-nowrap">
+        <td className="h-px w-px hidden lg:table-cell md:table-cell whitespace-nowrap">
           <div className="px-6 py-3">
             {props.data.status == "PRESENT" ? (
               <span className="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
@@ -190,7 +204,7 @@ function Rows(props) {
             )}
           </div>
         </td>
-        <td className="h-px w-px whitespace-nowrap">
+        <td className="h-px w-px hidden lg:table-cell md:table-cell whitespace-nowrap">
           <div className="px-6 py-3">
             <div className="flex items-center gap-x-3">
               <span className="text-xs text-gray-500"></span>
@@ -509,6 +523,64 @@ function Model(props) {
   );
 }
 
+function Thead() {
+  return (
+    <thead className="bg-gray-50 dark:bg-slate-800">
+      <tr className="">
+        {/* <th scope="col" className="pl-6 py-3 text-left">
+                        <label
+                          htmlFor="hs-at-with-checkboxes-main"
+                          className="flex"
+                        >
+                          <input
+                            type="checkbox"
+                            className="shrink-0 border-gray-200 rounded text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                            id="hs-at-with-checkboxes-main"
+                          />
+                          <span className="sr-only">Checkbox</span>
+                        </label>
+                      </th> */}
+        <th scope="col" className="pl-6 lg:pl-6 sm:pl-0 pr-6 py-3 text-center">
+          <div className="flex items-center gap-x-2">
+            <span className="text-xs ml-4 font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+              Name
+            </span>
+          </div>
+        </th>
+        <th scope="col" className="px-6 py-3 hidden lg:table-cell text-left">
+          <div className="flex items-center gap-x-2">
+            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+              Facilatator
+            </span>
+          </div>
+        </th>
+        <th scope="col" className="px-6 py-3 hidden lg:table-cell md:table-cell text-left">
+          <div className="flex items-center gap-x-2">
+            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+              Status
+            </span>
+          </div>
+        </th>
+        <th scope="col" className="px-6 py-3 hidden lg:table-cell md:table-cell text-left">
+          <div className="flex items-center gap-x-2">
+            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+              japa Duration
+            </span>
+          </div>
+        </th>
+        {/* <th scope="col" className="px-6 py-3 text-left">
+                        <div className="flex items-center gap-x-2">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                            Date
+                          </span>
+                        </div>
+                      </th> */}
+        <th scope="col" className="px-6 py-3 text-right" />
+      </tr>
+    </thead>
+  );
+}
+
 export default function App() {
   function getTodayDateInFormat() {
     const today = new Date();
@@ -519,9 +591,11 @@ export default function App() {
     return `${year}-${month}-${day}`;
   }
   const [data, setData] = useState([]);
+  const [isUpdated, setIsUpdated] = useState(true);
   const [url, setUrl] = useState(
     "https://copyhlzglobalregistration-production.up.railway.app/v1/attendance/japa/fetchAll?date=" +
       getTodayDateInFormat()
+      // "2023-07-24"
   );
   const [filtereddata, setFilteredData] = useState([]);
 
@@ -534,6 +608,9 @@ export default function App() {
       const response = await axios.post(url, {});
       setData(response.data);
       setFilteredData(response.data);
+      if (response.data.length == 0) {
+        setIsUpdated(false);
+      }
       // console.log(data);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -557,83 +634,24 @@ export default function App() {
                   setData={setData}
                   data={data}
                   setFilteredData={setFilteredData}
+                  setIsUpdated={setIsUpdated}
                 />
                 {/* End Header */}
                 {/* Table */}
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                  <thead className="bg-gray-50 dark:bg-slate-800">
-                    <tr className="">
-                      {/* <th scope="col" className="pl-6 py-3 text-left">
-                        <label
-                          htmlFor="hs-at-with-checkboxes-main"
-                          className="flex"
-                        >
-                          <input
-                            type="checkbox"
-                            className="shrink-0 border-gray-200 rounded text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                            id="hs-at-with-checkboxes-main"
-                          />
-                          <span className="sr-only">Checkbox</span>
-                        </label>
-                      </th> */}
-                      <th
-                        scope="col"
-                        className="pl-6 lg:pl-6 sm:pl-0 pr-6 py-3 text-center"
-                      >
-                        <div className="flex items-center gap-x-2">
-                          <span className="text-xs ml-4 font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            Name
-                          </span>
-                        </div>
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-left">
-                        <div className="flex items-center gap-x-2">
-                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            Facilatator
-                          </span>
-                        </div>
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-left">
-                        <div className="flex items-center gap-x-2">
-                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            Status
-                          </span>
-                        </div>
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-left">
-                        <div className="flex items-center gap-x-2">
-                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            japa Duration
-                          </span>
-                        </div>
-                      </th>
-                      {/* <th scope="col" className="px-6 py-3 text-left">
-                        <div className="flex items-center gap-x-2">
-                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            Date
-                          </span>
-                        </div>
-                      </th> */}
-                      <th scope="col" className="px-6 py-3 text-right" />
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                    {data.length == 0 ? (
-                      <>
-                        <Dummy />
-                        <Dummy />
-                        <Dummy />
-                        <Dummy />
-                        <Dummy />
-                        <Dummy />
-                      </>
-                    ) : (
-                      filtereddata.map((o, i) => {
-                        return <Rows data={o} key={i} />;
-                      })
-                    )}
-                  </tbody>
-                </table>
+                {data.length == 0 ? (
+                  <>{isUpdated ? <Simmer /> : <NotUpdated />}</>
+                ) : (
+                  <>
+                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                      <Thead />
+                      <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                        {filtereddata.map((o, i) => {
+                          return <Rows data={o} key={i} />;
+                        })}
+                      </tbody>
+                    </table>
+                  </>
+                )}
                 {/* End Table */}
                 {/* Footer */}
                 <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-gray-700">
