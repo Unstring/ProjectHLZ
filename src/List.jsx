@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useMemo } from "react";
 
 import TableHeader from "./Components/TableHeader";
 
@@ -733,6 +734,16 @@ export default function App() {
     // "2023-07-24"
   );
   const [filtereddata, setFilteredData] = useState([]);
+  const [pageSize, setPageSize] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // const [currentPage, setCurrentPage] = useState(1);
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * pageSize;
+    const lastPageIndex = firstPageIndex + pageSize;
+    return filtereddata.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, filtereddata, pageSize]);
 
   useEffect(() => {
     fetchData(url);
@@ -751,6 +762,16 @@ export default function App() {
       console.error("Error fetching products:", error);
     }
   };
+
+  function prevClickHandler() {
+    setCurrentPage(currentPage - 1);
+  }
+  function nextClickHandler() {
+    setCurrentPage(currentPage + 1);
+  }
+  function pageSizeHandler(event) {
+    setPageSize(event.target.value);
+  }
 
   return (
     <>
@@ -780,7 +801,7 @@ export default function App() {
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                       <Thead />
                       <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                        {filtereddata.map((o, i) => {
+                        {currentTableData.map((o, i) => {
                           return <Rows data={o} key={i} />;
                         })}
                       </tbody>
@@ -790,19 +811,37 @@ export default function App() {
                 {/* End Table */}
                 {/* Footer */}
                 <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-gray-700">
-                  <div>
+                  {/* <div>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                       <span className="font-semibold text-gray-800 dark:text-gray-200">
-                        {filtereddata.length}
+                        {currentTableData.length}
                       </span>{" "}
                       results
                     </p>
-                  </div>
+                  </div> */}
+                  <div className="inline-flex items-center gap-x-2">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Showing:
+                </p>
+                <div className="max-w-sm space-y-3">
+                  <input 
+                  type="text"
+                  className="py-2 px-2 block w-8 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                  onChange={pageSizeHandler}
+                  value={pageSize}
+                  />
+                    
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  of {filtereddata.length} results
+                </p>
+              </div>
                   <div>
                     <div className="inline-flex gap-x-2">
                       <button
                         type="button"
                         className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+                        onClick={prevClickHandler}
                       >
                         <svg
                           className="w-3 h-3"
@@ -822,6 +861,7 @@ export default function App() {
                       <button
                         type="button"
                         className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+                        onClick={nextClickHandler}
                       >
                         Next
                         <svg
