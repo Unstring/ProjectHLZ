@@ -1,10 +1,9 @@
 import { useState } from "react";
 export default function TableHeader(props) {
-
-
-  const [searchTerm, setSearchTerm] = useState('');
-
-
+  const [searchTerm, setSearchTerm] = useState("");
+  const [checkedFilter, setCheckedFilter] = useState(0);
+  const [jdFilter, setJDFilter] = useState(false);
+  const [presentFilter, setPresentFilter] = useState(false);
 
   // Function to get the previous date from the given input date
   function getPreviousDate(inputDate) {
@@ -33,58 +32,84 @@ export default function TableHeader(props) {
   function getTodayDateInFormat() {
     const today = new Date();
     const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-  
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+
     return `${year}-${month}-${day}`;
   }
-  
+
   const formattedDate = getTodayDateInFormat();
   // console.log(formattedDate); // Output: "yyyy-mm-dd" format of today's date
-  
-function nextHandler() {
-  props.setData([])
-  let date  = props.url.split("=")[1];
-  let purl = props.url.split("=")[0];
-  let nurl = purl + "=" + getNextDate(date)
-  props.fetchData(nurl);
-  props.setUrl(nurl)
-  props.setIsUpdated(true)
-}
-function prevHandler() {
-  props.setData([])
-  let date  = props.url.split("=")[1];
-  let purl = props.url.split("=")[0];
-  let nurl = purl + "=" + getPreviousDate(date)
-  props.fetchData(nurl);
-  props.setUrl(nurl)
-  props.setIsUpdated(true)
-}
 
-function applyFilters(searchInput) {
-  let filtered = [];
-  if (props.data && props.data.length > 0) {
-    let Alldata = [...props.data];
-    if (searchInput) {
-      const searchTerm = searchInput.toLowerCase().trim();
-      filtered = Alldata.filter(
-        (e) =>
-        e.japaParticipants.name.toLowerCase().includes(searchTerm)
-        // console.log(e.japaParticipants.name.toLowerCase())
-        // console.log(searchTerm)
+  function nextHandler() {
+    props.setData([]);
+    let date = props.url.split("=")[1];
+    let purl = props.url.split("=")[0];
+    let nurl = purl + "=" + getNextDate(date);
+    props.fetchData(nurl);
+    props.setUrl(nurl);
+    props.setIsUpdated(true);
+  }
+  function prevHandler() {
+    props.setData([]);
+    let date = props.url.split("=")[1];
+    let purl = props.url.split("=")[0];
+    let nurl = purl + "=" + getPreviousDate(date);
+    props.fetchData(nurl);
+    props.setUrl(nurl);
+    props.setIsUpdated(true);
+  }
+
+  function applyFilters(searchInput, jdFilter, presentFilter) {
+    let filtered = [];
+    setCheckedFilter(jdFilter + presentFilter)
+    if (props.data && props.data.length > 0) {
+      let Alldata = [...props.data];
+      if (searchInput) {
+        const searchTerm = searchInput.toLowerCase().trim();
+        filtered = Alldata.filter(
+          (e) => e.japaParticipants.name.toLowerCase().includes(searchTerm)
+          // console.log(e.japaParticipants.name.toLowerCase())
+          // console.log(searchTerm)
+          // console.log(e.japaParticipants.name.toLowerCase().includes(searchTerm))
+          );
+      } else {
+        filtered = [...Alldata];
+      }
+      if (presentFilter) {
+        filtered = filtered.filter((e) => 
+          // console.log(e.status == "PRESENT");
+          e.status === "PRESENT"
         );
-      }else{
-        filtered = Alldata;
+      } else {
+        // filtered = [...Alldata];
+      }
+      if (jdFilter) {
+        filtered = filtered.sort((a,b)=>{
+          return b.totalMinutes - a.totalMinutes;
+        })
       }
       // console.log(filtered)
-      props.setFilteredData(filtered)
+      props.setFilteredData(filtered);
     }
-}
+  }
 
-function handleSearch(event) {
-  setSearchTerm(event.target.value)
-  applyFilters(event.target.value)
-}
+  function handleChangePresent(event) {
+    setPresentFilter(event.target.checked)
+    applyFilters(searchTerm,jdFilter,event.target.checked)
+    // event.target.checked?setCheckedFilter(checkedFilter + 1):setCheckedFilter(checkedFilter - 1)
+  }
+  
+  function handleChangeJDAcc(event) {
+    setJDFilter(event.target.checked)
+    applyFilters(searchTerm,event.target.checked,presentFilter)
+    // event.target.checked?setCheckedFilter(checkedFilter + 1):setCheckedFilter(checkedFilter - 1)
+  }
+
+  function handleSearch(event) {
+    setSearchTerm(event.target.value);
+    applyFilters(event.target.value, jdFilter, presentFilter);
+  }
 
   return (
     <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-700">
@@ -102,7 +127,6 @@ function handleSearch(event) {
             placeholder="Search"
             onChange={handleSearch}
             value={searchTerm}
-
           />
           <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none pl-4">
             <svg
@@ -143,28 +167,30 @@ function handleSearch(event) {
                 </svg>
                 Prev Date
               </button>
-              {getTodayDateInFormat() == props.url.split("=")[1] ? (<></>):(
-              <button
-                type="button"
-                className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
-                onClick={nextHandler}
-              >
-                {/* {console.log(props)} */}
-                Next Date
-                <svg
-                  className="w-3 h-3"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={16}
-                  height={16}
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
+              {getTodayDateInFormat() == props.url.split("=")[1] ? (
+                <></>
+              ) : (
+                <button
+                  type="button"
+                  className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+                  onClick={nextHandler}
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-                  />
-                </svg>
-              </button>
+                  {/* {console.log(props)} */}
+                  Next Date
+                  <svg
+                    className="w-3 h-3"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={16}
+                    height={16}
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
+                    />
+                  </svg>
+                </button>
               )}
             </div>
           </div>
@@ -310,9 +336,13 @@ function handleSearch(event) {
                 <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
               </svg>
               Filter
+              {checkedFilter?(
               <span className="pl-2 text-xs font-semibold text-blue-600 border-l border-gray-200 dark:border-gray-700 dark:text-blue-500">
-                1
+                {checkedFilter}
               </span>
+              ):(
+                <></>
+              )}
             </button>
             <div
               className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden mt-2 divide-y divide-gray-200 min-w-[12rem] z-10 bg-white shadow-md rounded-lg mt-2 dark:divide-gray-700 dark:bg-gray-800 dark:border dark:border-gray-700"
@@ -328,9 +358,10 @@ function handleSearch(event) {
                     className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
                     id="hs-as-filters-dropdown-all"
                     defaultChecked=""
+                    onChange={handleChangePresent}
                   />
                   <span className="ml-3 text-sm text-gray-800 dark:text-gray-200">
-                    All
+                    Present
                   </span>
                 </label>
                 <label
@@ -341,12 +372,13 @@ function handleSearch(event) {
                     type="checkbox"
                     className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
                     id="hs-as-filters-dropdown-published"
+                    onChange={handleChangeJDAcc}
                   />
                   <span className="ml-3 text-sm text-gray-800 dark:text-gray-200">
-                    Published
+                    Japa Duration Accending
                   </span>
                 </label>
-                <label
+                {/* <label
                   htmlFor="hs-as-filters-dropdown-pending"
                   className="flex py-2.5 px-3"
                 >
@@ -356,14 +388,14 @@ function handleSearch(event) {
                     id="hs-as-filters-dropdown-pending"
                   />
                   <span className="ml-3 text-sm text-gray-800 dark:text-gray-200">
-                    Pending
+                    Absent
                   </span>
-                </label>
+                </label> */}
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

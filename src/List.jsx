@@ -97,30 +97,159 @@ function NotUpdated() {
     //   </td>
     // </tr>
     <>
-      <div className="grow my-36">
-        {" "}
-        <span className="block text-sm font-semibold text-gray-800 text-center dark:text-gray-200">
-          {" "}
-          Data not updated till now{" "}
-        </span>{" "}
+      <div className="flex flex-auto flex-col justify-center my-32 items-center p-4 md:p-5">
+        <svg
+          className="max-w-[5rem]"
+          viewBox="0 0 375 428"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M254.509 253.872L226.509 226.872"
+            className="stroke-gray-400 dark:stroke-white"
+            stroke="currentColor"
+            strokeWidth={7}
+            strokeLinecap="round"
+          />
+          <path
+            d="M237.219 54.3721C254.387 76.4666 264.609 104.226 264.609 134.372C264.609 206.445 206.182 264.872 134.109 264.872C62.0355 264.872 3.60864 206.445 3.60864 134.372C3.60864 62.2989 62.0355 3.87207 134.109 3.87207C160.463 3.87207 184.993 11.6844 205.509 25.1196"
+            className="stroke-gray-400 dark:stroke-white"
+            stroke="currentColor"
+            strokeWidth={7}
+            strokeLinecap="round"
+          />
+          <rect
+            x="270.524"
+            y="221.872"
+            width="137.404"
+            height="73.2425"
+            rx="36.6212"
+            transform="rotate(40.8596 270.524 221.872)"
+            className="fill-gray-400 dark:fill-white"
+            fill="currentColor"
+          />
+          <ellipse
+            cx="133.109"
+            cy="404.372"
+            rx="121.5"
+            ry="23.5"
+            className="fill-gray-400 dark:fill-white"
+            fill="currentColor"
+          />
+          <path
+            d="M111.608 188.872C120.959 177.043 141.18 171.616 156.608 188.872"
+            className="stroke-gray-400 dark:stroke-white"
+            stroke="currentColor"
+            strokeWidth={7}
+            strokeLinecap="round"
+          />
+          <ellipse
+            cx="96.6084"
+            cy="116.872"
+            rx={9}
+            ry={12}
+            className="fill-gray-400 dark:fill-white"
+            fill="currentColor"
+          />
+          <ellipse
+            cx="172.608"
+            cy="117.872"
+            rx={9}
+            ry={12}
+            className="fill-gray-400 dark:fill-white"
+            fill="currentColor"
+          />
+          <path
+            d="M194.339 147.588C189.547 148.866 189.114 142.999 189.728 138.038C189.918 136.501 191.738 135.958 192.749 137.131C196.12 141.047 199.165 146.301 194.339 147.588Z"
+            className="fill-gray-400 dark:fill-white"
+            fill="currentColor"
+          />
+        </svg>
+        <p className="mt-5 text-sm text-gray-500 dark:text-gray-500">
+          Data Not Updated Till Now!
+        </p>
+        <p className="mt-5 text-sm text-gray-500 dark:text-gray-500">
+          Please click on "Prev Date" above to see the previous data!
+        </p>
       </div>
     </>
   );
 }
 
-function Simmer(props) {
+function Simmer() {
   return (
     <>
-      <div className="grow my-36">
-        <span className="block text-sm font-semibold text-gray-800 text-center dark:text-gray-200">
-        <div
-          className="animate-spin inline-block w-8 h-8 border-[3px] border-current border-t-transparent text-blue-600 rounded-full"
-          role="status"
-          aria-label="loading"
-        >
-          <span className="sr-only">Loading...</span>
+      <div className="flex animate-pulse">
+        {/* <div className="flex-shrink-0">
+          <span className="w-12 h-12 block bg-gray-200 rounded-full dark:bg-gray-700" />
+        </div> */}
+        <div className="ml-4 mr-4 mt-2 w-full">
+          <div className="flex">
+            <h3 className="h-10 w-52 bg-gray-200 rounded-md dark:bg-gray-700" />
+            <h3
+              className="h-10 ml-2 bg-gray-200 rounded-md dark:bg-gray-700 hidden lg:block"
+              style={{ width: "30%" }}
+            />
+            <h3
+              className="h-10 ml-2 bg-gray-200 rounded-md dark:bg-gray-700 hidden md:bock lg:block"
+              style={{ width: "15%" }}
+            />
+            <h3
+              className="h-10 ml-2 bg-gray-200 rounded-md dark:bg-gray-700 hidden md:bock lg:block"
+              style={{ width: "18%" }}
+            />
+          </div>
+          <ul className="mt-5 space-y-1 mb-4">
+            <div className="flex">
+              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+            </div>
+            <div className="flex">
+              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+            </div>
+            <div className="flex">
+              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+            </div>
+            <div className="flex">
+              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+            </div>
+            <div className="flex">
+              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+            </div>
+            {/* <div className="flex">
+              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+            </div>
+            <div className="flex">
+              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+            </div>
+            <div className="flex">
+              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+            </div>
+            <div className="flex">
+              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+            </div>
+            <div className="flex">
+              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+            </div>
+            <div className="flex">
+              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+            </div>
+            <div className="flex">
+              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+            </div> */}
+          </ul>
         </div>
-        </span>
       </div>
     </>
   );
@@ -554,14 +683,20 @@ function Thead() {
             </span>
           </div>
         </th>
-        <th scope="col" className="px-6 py-3 hidden lg:table-cell md:table-cell text-left">
+        <th
+          scope="col"
+          className="px-6 py-3 hidden lg:table-cell md:table-cell text-left"
+        >
           <div className="flex items-center gap-x-2">
             <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
               Status
             </span>
           </div>
         </th>
-        <th scope="col" className="px-6 py-3 hidden lg:table-cell md:table-cell text-left">
+        <th
+          scope="col"
+          className="px-6 py-3 hidden lg:table-cell md:table-cell text-left"
+        >
           <div className="flex items-center gap-x-2">
             <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
               japa Duration
@@ -595,7 +730,7 @@ export default function App() {
   const [url, setUrl] = useState(
     "https://copyhlzglobalregistration-production.up.railway.app/v1/attendance/japa/fetchAll?date=" +
       getTodayDateInFormat()
-      // "2023-07-24"
+    // "2023-07-24"
   );
   const [filtereddata, setFilteredData] = useState([]);
 

@@ -13,8 +13,7 @@ export default function  Foot(){ return(
           Project HLZ
         </Link>
       </div>
-      {/* End Col */}
-      <div className="col-span-1">
+      {/* <div className="col-span-1">
         <h4 className="font-semibold text-gray-100">Product</h4>
         <div className="mt-3 grid space-y-3">
           <p>
@@ -43,7 +42,6 @@ export default function  Foot(){ return(
           </p>
         </div>
       </div>
-      {/* End Col */}
       <div className="col-span-1">
         <h4 className="font-semibold text-gray-100">Company</h4>
         <div className="mt-3 grid space-y-3">
@@ -83,9 +81,8 @@ export default function  Foot(){ return(
             </Link>
           </p>
         </div>
-      </div>
-      {/* End Col */}
-      <div className="col-span-2">
+      </div> */}
+      {/* <div className="col-span-2">
         <h4 className="font-semibold text-gray-100">Stay up to date</h4>
         <form>
           <div className="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:gap-3 bg-white rounded-md p-2">
@@ -112,8 +109,7 @@ export default function  Foot(){ return(
             New UI kits or big discounts. Never spam.
           </p>
         </form>
-      </div>
-      {/* End Col */}
+      </div> */}
     </div>
     {/* End Grid */}
     <div className="mt-5 sm:mt-12 grid gap-y-2 sm:gap-y-0 sm:flex sm:justify-between sm:items-center">
