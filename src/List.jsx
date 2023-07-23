@@ -142,11 +142,11 @@ function Rows(props) {
                       </label>
           </div>
         </td> */}
-        <td className="h-px w-px pl-4 whitespace-nowrap">
-          <div className="pl-6 lg:pl-3 xl:pl-0 pr-6 py-3">
-            <div className="flex items-center gap-x-3">
+        <td className="h-px w-px whitespace-nowrap">
+          <div className="pl-2 lg:pl-3 xl:pl-0 py-3">
+            <div className="flex items-center md:pl-4 gap-x-1">
               <img
-                className="inline-block h-[2.375rem] w-[2.375rem] rounded-full"
+                className="inline-block h-[2.375rem] w-[2.375rem] hidden md:block  rounded-full"
                 src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80"
                 alt="Image Description"
               />
@@ -620,7 +620,7 @@ export default function App() {
   return (
     <>
       {/* Table Section */}
-      <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+      <div className="max-w-[85rem] px-2 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         {/* Card */}
         <div className="flex flex-col">
           <div className="-m-1.5 overflow-x-auto">
