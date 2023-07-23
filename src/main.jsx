@@ -9,6 +9,7 @@ import List from './List.jsx'
 import Details from './Details.jsx'
 import Nav from './common/Nav'
 import Foot from './common/Foot'
+import Error from "./Components/Error"
 
 
 const AppLayout = () => {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
+    errorElement: <Error/>,
     children: [
       {
         path: "/",
