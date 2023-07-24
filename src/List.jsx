@@ -734,7 +734,7 @@ export default function App() {
     // "2023-07-24"
   );
   const [filtereddata, setFilteredData] = useState([]);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(15);
   const [currentPage, setCurrentPage] = useState(1);
 
   // const [currentPage, setCurrentPage] = useState(1);
@@ -823,7 +823,10 @@ export default function App() {
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   Showing:
                 </p>
-                <div className="max-w-sm space-y-3">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {currentTableData.length == 0 ?0:((currentPage - 1) * pageSize + 1)} to {((currentPage - 1) * pageSize) + currentTableData.length}
+                </p>
+                {/* <div className="max-w-sm space-y-3">
                   <input 
                   type="text"
                   className="py-2 px-2 block w-8 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
@@ -831,33 +834,43 @@ export default function App() {
                   value={pageSize}
                   />
                     
-                </div>
+                </div> */}
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   of {filtereddata.length} results
                 </p>
               </div>
                   <div>
                     <div className="inline-flex gap-x-2">
-                      <button
-                        type="button"
-                        className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
-                        onClick={prevClickHandler}
-                      >
-                        <svg
-                          className="w-3 h-3"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={16}
-                          height={16}
-                          fill="currentColor"
-                          viewBox="0 0 16 16"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
-                          />
-                        </svg>
-                        Prev
-                      </button>
+                      {
+                        currentPage == 1 ? (<></>) : (
+                          <button
+                            type="button"
+                            className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+                            onClick={prevClickHandler}
+                          >
+                            <svg
+                              className="w-3 h-3"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width={16}
+                              height={16}
+                              fill="currentColor"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+                              />
+                            </svg>
+                            Prev
+                          </button>
+                        )
+                      }
+                        {/* {console.log(currentPage)}{console.log(((filtereddata.length - (filtereddata.length%pageSize)) / pageSize) + 1)} */}
+                      {
+                        currentPage == (((filtereddata.length - (filtereddata.length%pageSize)) / pageSize) + 1) ?(
+                          <>
+                          </>
+                        ):(
                       <button
                         type="button"
                         className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
@@ -878,6 +891,8 @@ export default function App() {
                           />
                         </svg>
                       </button>
+                        )
+                      }
                     </div>
                   </div>
                 </div>
