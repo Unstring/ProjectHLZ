@@ -184,77 +184,90 @@ function Simmer() {
         {/* <div className="flex-shrink-0">
           <span className="w-12 h-12 block bg-gray-200 rounded-full dark:bg-gray-700" />
         </div> */}
-        <div className="ml-4 mr-4 mt-2 w-full">
+        <div className="ml-4 mr-4 mt-1 w-full">
           <div className="flex">
-            <h3 className="h-10 w-52 bg-gray-200 rounded-md dark:bg-gray-700" />
+            <h3 className="h-9 w-52 bg-gray-200 rounded-md dark:bg-gray-700" />
             <h3
-              className="h-10 ml-2 bg-gray-200 rounded-md dark:bg-gray-700 hidden lg:block"
+              className="h-9 ml-2 bg-gray-200 rounded-md dark:bg-gray-700 hidden lg:block"
               style={{ width: "30%" }}
             />
             <h3
-              className="h-10 ml-2 bg-gray-200 rounded-md dark:bg-gray-700 hidden md:bock lg:block"
+              className="h-9 ml-2 bg-gray-200 rounded-md dark:bg-gray-700 hidden lg:block md:bock"
               style={{ width: "15%" }}
             />
             <h3
-              className="h-10 ml-2 bg-gray-200 rounded-md dark:bg-gray-700 hidden md:bock lg:block"
+              className="h-9 ml-2 bg-gray-200 rounded-md dark:bg-gray-700 hidden lg:block md:bock"
               style={{ width: "18%" }}
             />
           </div>
-          <ul className="mt-5 space-y-1 mb-4">
+          <ul className="mt-1 space-y-[0.5] mb-4">
             <div className="flex">
-              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
-              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+              <p className="w-11/12 h-16 mt-px bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-4"></p>
             </div>
             <div className="flex">
-              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
-              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+              <p className="w-11/12 h-16 mt-px bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-4"></p>
             </div>
             <div className="flex">
-              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
-              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+              <p className="w-11/12 h-16 mt-px bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-4"></p>
             </div>
             <div className="flex">
-              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
-              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+              <p className="w-11/12 h-16 mt-px bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-4"></p>
             </div>
             <div className="flex">
-              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
-              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
-            </div>
-            {/* <div className="flex">
-              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
-              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+              <p className="w-11/12 h-16 mt-px bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-4"></p>
             </div>
             <div className="flex">
-              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
-              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+              <p className="w-11/12 h-16 mt-px bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-4"></p>
             </div>
             <div className="flex">
-              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
-              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+              <p className="w-11/12 h-16 mt-px bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-4"></p>
             </div>
             <div className="flex">
-              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
-              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+              <p className="w-11/12 h-16 mt-px bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-4"></p>
             </div>
             <div className="flex">
-              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
-              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+              <p className="w-11/12 h-16 mt-px bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-4"></p>
             </div>
             <div className="flex">
-              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
-              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
+              <p className="w-11/12 h-16 mt-px bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-4"></p>
             </div>
             <div className="flex">
-              <p className="w-11/12 h-14 bg-gray-200 rounded-md dark:bg-gray-700"></p>
-              <p className="h-10 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-2"></p>
-            </div> */}
+              <p className="w-11/12 h-16 mt-px bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-4"></p>
+            </div>
+            <div className="flex">
+              <p className="w-11/12 h-16 mt-px bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-4"></p>
+            </div>
+            <div className="flex">
+              <p className="w-11/12 h-16 mt-px bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-4"></p>
+            </div>
+            <div className="flex">
+              <p className="w-11/12 h-16 mt-px bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-4"></p>
+            </div>
+            <div className="flex">
+              <p className="w-11/12 h-16 mt-px bg-gray-200 rounded-md dark:bg-gray-700"></p>
+              <p className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 m-3 w-20 mt-4"></p>
+            </div>
           </ul>
         </div>
       </div>
     </>
   );
 }
+
 
 function Rows(props) {
   return (
@@ -282,10 +295,11 @@ function Rows(props) {
               />
               <div className="grow">
                 <span className="block text-sm font-semibold text-gray-800 dark:text-gray-200">
-                  {props.data.japaParticipants.name}
+                  {/* {console.log(props)} */}
+                  {props.data.user.name}
                 </span>
                 <span className="block text-sm text-gray-500">
-                  {props.data.japaParticipants.email}
+                  {props.data.user.email}
                 </span>
               </div>
             </div>
@@ -315,7 +329,7 @@ function Rows(props) {
                 >
                   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                 </svg>
-                {props.data.date}
+                {props.date}
               </span>
             ) : (
               <span className="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
@@ -329,7 +343,7 @@ function Rows(props) {
                 >
                   <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                 </svg>
-                {props.data.date}
+                {props.date}
               </span>
             )}
           </div>
@@ -342,7 +356,7 @@ function Rows(props) {
                 <div
                   className="flex flex-col justify-center overflow-hidden bg-gray-800 dark:bg-gray-200"
                   role="progressbar"
-                  style={{ width: (10 / 12) * props.data.totalMinutes + "%" }}
+                  style={{ width: (10 / 12) * props.data.duration + "%" }}
                   aria-valuenow={100}
                   aria-valuemin={0}
                   aria-valuemax={120}
@@ -351,7 +365,7 @@ function Rows(props) {
               </div>
             </div>
             <span className="ml-3 align-middle text-sm text-gray-500">
-              {props.data.duration}
+              {(props.data.duration - props.data.duration % 60)/60} hour {props.data.duration%60} minutes
             </span>
           </div>
         </td>
@@ -376,7 +390,7 @@ function Rows(props) {
             // href="javascript:;"
             data-hs-overlay={
               "#" +
-              props.data.japaParticipants.email
+              props.data.user.email
                 .split("@")[0]
                 .replaceAll(".", "")
             }
@@ -399,16 +413,16 @@ function Rows(props) {
             </div>
           </a>
           <Model
-            id={props.data.japaParticipants.email
+            id={props.data.user.email
               .split("@")[0]
               .replaceAll(".", "")}
-            name={props.data.japaParticipants.name}
-            email={props.data.japaParticipants.email}
+            name={props.data.user.name}
+            email={props.data.user.email}
             status={props.data.status}
             duration={props.data.duration}
-            date={props.data.date}
-            jointime={props.data.joinTime}
-            leavetime={props.data.leaveTime}
+            date={props.date}
+            jointime={props.data.inoutTime ? props.data.inoutTime.split("-")[0]:""}
+            leavetime={props.data.inoutTime ? props.data.inoutTime.split("-")[1]:""}
           />
         </td>
       </tr>
@@ -519,7 +533,7 @@ function Model(props) {
                 </span>
 
                 <span className="block text-sm font-medium text-gray-800 dark:text-gray-200">
-                  {props.duration}
+                  {(props.duration - props.duration%60)/60} hour {props.duration%60} minute
                 </span>
                 {/* <div className="flex items-center gap-x-2">
                 <svg
@@ -727,11 +741,12 @@ export default function App() {
     return `${year}-${month}-${day}`;
   }
   const [data, setData] = useState([]);
+  const [date, setDate] = useState(getTodayDateInFormat());
   const [isUpdated, setIsUpdated] = useState(true);
   const [url, setUrl] = useState(
-    "https://copyhlzglobalregistration-production.up.railway.app/v1/attendance/japa/fetchAll?date=" +
+    "https://apiforjapa.dailywith.me/records/meetings?join=attendance,users&filter=date,sw," +
       getTodayDateInFormat()
-    // "2023-07-24"
+    // "2023-07-23"
   );
   const [filtereddata, setFilteredData] = useState([]);
   const [pageSize, setPageSize] = useState(15);
@@ -751,13 +766,15 @@ export default function App() {
   // console.log(data);
   const fetchData = async (url) => {
     try {
-      const response = await axios.post(url, {});
-      setData(response.data);
-      setFilteredData(response.data);
-      if (response.data.length == 0) {
+      const response = await axios.get(url, {});
+      if (response.data.records.length == 0) {
         setIsUpdated(false);
-      }
+      }else{
+      setData(response.data?.records[0]?.attendance);
+      setFilteredData(response.data?.records[0]?.attendance);
+      setDate(response.data.records[0].date)
       // console.log(data);
+      }
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -776,6 +793,7 @@ export default function App() {
   return (
     <>
       {/* Table Section */}
+      {/* {console.log(data)} */}
       <div className="max-w-[85rem] px-2 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         {/* Card */}
         <div className="flex flex-col">
@@ -788,9 +806,12 @@ export default function App() {
                   setUrl={setUrl}
                   url={url}
                   setData={setData}
+                  setDate={setDate}
                   data={data}
+                  date={date}
                   setFilteredData={setFilteredData}
                   setIsUpdated={setIsUpdated}
+                  setCurrentPage={setCurrentPage}
                 />
                 {/* End Header */}
                 {/* Table */}
@@ -802,7 +823,7 @@ export default function App() {
                       <Thead />
                       <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                         {currentTableData.map((o, i) => {
-                          return <Rows data={o} key={i} />;
+                          return <Rows data={o} date={date} key={i} />;
                         })}
                       </tbody>
                     </table>
@@ -811,14 +832,7 @@ export default function App() {
                 {/* End Table */}
                 {/* Footer */}
                 <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-gray-700">
-                  {/* <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      <span className="font-semibold text-gray-800 dark:text-gray-200">
-                        {currentTableData.length}
-                      </span>{" "}
-                      results
-                    </p>
-                  </div> */}
+              
                   <div className="inline-flex items-center gap-x-2">
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   Showing:
@@ -826,15 +840,7 @@ export default function App() {
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   {currentTableData.length == 0 ?0:((currentPage - 1) * pageSize + 1)} to {((currentPage - 1) * pageSize) + currentTableData.length}
                 </p>
-                {/* <div className="max-w-sm space-y-3">
-                  <input 
-                  type="text"
-                  className="py-2 px-2 block w-8 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                  onChange={pageSizeHandler}
-                  value={pageSize}
-                  />
-                    
-                </div> */}
+                
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   of {filtereddata.length} results
                 </p>
@@ -865,7 +871,6 @@ export default function App() {
                           </button>
                         )
                       }
-                        {/* {console.log(currentPage)}{console.log(((filtereddata.length - (filtereddata.length%pageSize)) / pageSize) + 1)} */}
                       {
                         currentPage == (((filtereddata.length - (filtereddata.length%pageSize)) / pageSize) + 1) ?(
                           <>

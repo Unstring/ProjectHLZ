@@ -1,7 +1,7 @@
 import { useState } from "react";
 export default function TableHeader(props) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [checkedFilter, setCheckedFilter] = useState(0);
+  const [checkedFilterCount, setCheckedFilterCount] = useState(0);
   const [jdFilter, setJDFilter] = useState(false);
   const [presentFilter, setPresentFilter] = useState(false);
 
@@ -43,18 +43,21 @@ export default function TableHeader(props) {
 
   function nextHandler() {
     props.setData([]);
-    let date = props.url.split("=")[1];
-    let purl = props.url.split("=")[0];
-    let nurl = purl + "=" + getNextDate(date);
+    let date = props.date;
+    let purl = props.url.slice(0,-10);
+    let nurl = purl+ getNextDate(date);
+    props.setDate(getNextDate(date))
     props.fetchData(nurl);
     props.setUrl(nurl);
+    // console.log(nurl);
     props.setIsUpdated(true);
   }
   function prevHandler() {
     props.setData([]);
-    let date = props.url.split("=")[1];
-    let purl = props.url.split("=")[0];
-    let nurl = purl + "=" + getPreviousDate(date);
+    let date = props.date;
+    let purl = props.url.slice(0,-10);
+    let nurl = purl + getPreviousDate(date);
+    props.setDate(getPreviousDate(date))
     props.fetchData(nurl);
     props.setUrl(nurl);
     props.setIsUpdated(true);
@@ -62,13 +65,14 @@ export default function TableHeader(props) {
 
   function applyFilters(searchInput, jdFilter, presentFilter) {
     let filtered = [];
-    setCheckedFilter(jdFilter + presentFilter)
+    props.setCurrentPage(1)
+    setCheckedFilterCount(jdFilter + presentFilter)
     if (props.data && props.data.length > 0) {
       let Alldata = [...props.data];
       if (searchInput) {
         const searchTerm = searchInput.toLowerCase().trim();
         filtered = Alldata.filter(
-          (e) => e.japaParticipants.name.toLowerCase().includes(searchTerm)
+          (e) => e.user.name.toLowerCase().includes(searchTerm)
           // console.log(e.japaParticipants.name.toLowerCase())
           // console.log(searchTerm)
           // console.log(e.japaParticipants.name.toLowerCase().includes(searchTerm))
@@ -86,7 +90,7 @@ export default function TableHeader(props) {
       }
       if (jdFilter) {
         filtered = filtered.sort((a,b)=>{
-          return b.totalMinutes - a.totalMinutes;
+          return b.duration - a.duration;
         })
       }
       // console.log(filtered)
@@ -97,13 +101,13 @@ export default function TableHeader(props) {
   function handleChangePresent(event) {
     setPresentFilter(event.target.checked)
     applyFilters(searchTerm,jdFilter,event.target.checked)
-    // event.target.checked?setCheckedFilter(checkedFilter + 1):setCheckedFilter(checkedFilter - 1)
+    // event.target.checked?setCheckedFilterCount(checkedFilterCount + 1):setCheckedFilterCount(checkedFilterCount - 1)
   }
   
   function handleChangeJDAcc(event) {
     setJDFilter(event.target.checked)
     applyFilters(searchTerm,event.target.checked,presentFilter)
-    // event.target.checked?setCheckedFilter(checkedFilter + 1):setCheckedFilter(checkedFilter - 1)
+    // event.target.checked?setCheckedFilterCount(checkedFilterCount + 1):setCheckedFilterCount(checkedFilterCount - 1)
   }
 
   function handleSearch(event) {
@@ -167,7 +171,7 @@ export default function TableHeader(props) {
                 </svg>
                 Prev Date
               </button>
-              {getTodayDateInFormat() == props.url.split("=")[1] ? (
+              {getTodayDateInFormat() == props.date ? (
                 <></>
               ) : (
                 <button
@@ -336,9 +340,9 @@ export default function TableHeader(props) {
                 <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
               </svg>
               Filter
-              {checkedFilter?(
+              {checkedFilterCount?(
               <span className="pl-2 text-xs font-semibold text-blue-600 border-l border-gray-200 dark:border-gray-700 dark:text-blue-500">
-                {checkedFilter}
+                {checkedFilterCount}
               </span>
               ):(
                 <></>
