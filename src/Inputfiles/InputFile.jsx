@@ -54,7 +54,7 @@ export default function SheetJSReactAoO() {
         preusers.push({ name: e.name, email: e.email });
       });
 
-    //   console.log(preusers);
+      //   console.log(preusers);
 
       let masterData = []; // Create an array to hold the users to be added
 
@@ -125,19 +125,24 @@ export default function SheetJSReactAoO() {
   async function postAttendanceDataToDatabase() {
     try {
       // Fetch users from the API
-      const usersResponse = await axios.get("https://apiforjapa.dailywith.me/records/users");
+      const usersResponse = await axios.get(
+        "https://apiforjapa.dailywith.me/records/users"
+      );
       const users = usersResponse.data.records;
-  
+
       // Create a map of user objects with 'name-email' as the key
       const userMap = new Map();
       for (const user of users) {
         const key = `${user.name}-${user.email || ""}`;
         userMap.set(key, user);
       }
-  
+
+      // Extract the meeting date from the first record of fres (assuming fres is not empty)
+      const meetingDate = formatDateToYmmdd(fres[0]["Join Time"]);
+
       // Register attendance data
       const finalAttendanceData = [];
-  
+
       for (const user of users) {
         const key = `${user.name}-${user.email || ""}`;
         const isUserPresentInFres = fres.some(
@@ -145,7 +150,7 @@ export default function SheetJSReactAoO() {
             data["Name (Original Name)"] === user.name &&
             data["User Email"] === user.email
         );
-  
+
         if (isUserPresentInFres) {
           // User is present in fres, so mark as PRESENT and add duration and inoutTime
           const dataInFres = fres.find(
@@ -153,47 +158,53 @@ export default function SheetJSReactAoO() {
               data["Name (Original Name)"] === user.name &&
               data["User Email"] === user.email
           );
-  
+
+          // Remove the first 9 characters from joinTime and leaveTime
+          const joinTime = dataInFres["Join Time"].substring(9);
+          const leaveTime = dataInFres["Leave Time"].substring(9);
+
           finalAttendanceData.push({
             user: user.id,
-            meeting: formatDateToYmmdd(dataInFres["Join Time"]),
+            meeting: meetingDate,
             duration: dataInFres["Duration (Minutes)"],
-            inoutTime: `${dataInFres["Join Time"]} - ${dataInFres["Leave Time"]}`,
+            inoutTime: `${joinTime} - ${leaveTime}`,
             status: "PRESENT",
           });
         } else {
           // User is absent in fres, so mark as ABSENT
           finalAttendanceData.push({
             user: user.id,
-            meeting: formatDateToYmmdd(new Date()), // Change this based on your date format requirement
-            duration: null,
-            inoutTime: null,
+            meeting: meetingDate,
+            // duration: null,
+            // inoutTime: null,
             status: "ABSENT",
           });
         }
       }
-  
+
       // Fetch stored data from the API
-      const storedDataResponse = await axios.get("https://apiforjapa.dailywith.me/records/attendance");
+      const storedDataResponse = await axios.get(
+        "https://apiforjapa.dailywith.me/records/attendance"
+      );
       const storedData = storedDataResponse.data.records;
-  
+
       // Create master data with unique entries that are not already in the stored data
       const masterData = [];
       const processedMasterEntries = new Set();
-  
+
       for (const attendanceEntry of finalAttendanceData) {
         const { user, meeting } = attendanceEntry;
         const key = `${user}-${meeting}`;
-  
+
         if (!processedMasterEntries.has(key)) {
           processedMasterEntries.add(key);
-  
+
           // Check if the user and meeting combination is already present in the stored data
           const isEntryAlreadyPosted = storedData.some(
             (storedEntry) =>
               storedEntry.user === user && storedEntry.meeting === meeting
           );
-  
+
           if (!isEntryAlreadyPosted) {
             masterData.push(attendanceEntry);
           } else {
@@ -205,14 +216,18 @@ export default function SheetJSReactAoO() {
       }
 
       console.log(masterData);
-  
+
       // Post the master data to the database
       if (masterData.length > 0) {
-        const postResponse = await axios.post(
-          "https://apiforjapa.dailywith.me/records/attendance",
-          masterData
-        );
-        console.log("Attendance data posted successfully:", postResponse.data);
+        masterData.forEach(record => {
+            
+            axios.post(
+              "https://apiforjapa.dailywith.me/records/attendance",
+              record
+            ).then(response=>{
+                console.log("Attendance data posted successfully:", response.data);
+            });
+        });
       } else {
         console.log("No new attendance data to post.");
       }
@@ -220,26 +235,20 @@ export default function SheetJSReactAoO() {
       console.error("Error processing attendance data:", error.message);
     }
   }
-  
-  
 
   function formatDateToYmmdd(dateString) {
     // Parse the date string using the Date constructor
-    const date = new Date(dateString);
+    const [datePart, timePart] = dateString.split(" ");
+    const [dd, mm, yy] = datePart.split("/");
 
-    // Extract year, month, and day components
-    const year = date.getFullYear().toString().slice(-2); // Get the last two digits of the year
-    let month = (date.getMonth() + 1).toString().padStart(2, "0"); // Add leading zero if needed
-    let day = date.getDate().toString().padStart(2, "0"); // Add leading zero if needed
-
-    // Concatenate the components to form the ymmdd format
-    return year + month + day;
+    const formattedDate = `${yy.split("")[1]}${mm}${dd}`;
+    return formattedDate;
   }
 
   function submitHandler() {
     postInMeeting();
     postInUsers();
-    postAttendanceDataToDatabase()
+    postAttendanceDataToDatabase();
     // postInAttendance();
   }
 
@@ -383,7 +392,7 @@ export default function SheetJSReactAoO() {
   //       postAttendanceData(finalAttendanceData);
   //     });
 
-//   console.log(fres);
+  console.log(fres);
   //   console.log(pres);
 
   return (
