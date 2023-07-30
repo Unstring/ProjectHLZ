@@ -296,10 +296,10 @@ function Rows(props) {
               <div className="grow">
                 <span className="block text-sm font-semibold text-gray-800 dark:text-gray-200">
                   {/* {console.log(props)} */}
-                  {props.data.user.name}
+                  {props?.data?.user?.name}
                 </span>
                 <span className="block text-sm text-gray-500">
-                  {props.data.user.email}
+                  {props?.data?.user?.email}
                 </span>
               </div>
             </div>
@@ -317,7 +317,7 @@ function Rows(props) {
         </td>
         <td className="h-px w-px hidden lg:table-cell md:table-cell whitespace-nowrap">
           <div className="px-6 py-3">
-            {props.data.status == "PRESENT" ? (
+            {props?.data?.status == "PRESENT" ? (
               <span className="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
                 <svg
                   className="w-2.5 h-2.5"
@@ -329,7 +329,7 @@ function Rows(props) {
                 >
                   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                 </svg>
-                {props.date}
+                {props?.date}
               </span>
             ) : (
               <span className="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
@@ -343,7 +343,7 @@ function Rows(props) {
                 >
                   <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                 </svg>
-                {props.date}
+                {props?.date}
               </span>
             )}
           </div>
@@ -356,7 +356,7 @@ function Rows(props) {
                 <div
                   className="flex flex-col justify-center overflow-hidden bg-gray-800 dark:bg-gray-200"
                   role="progressbar"
-                  style={{ width: (10 / 12) * props.data.duration + "%" }}
+                  style={{ width: (10 / 12) * props?.data?.duration + "%" }}
                   aria-valuenow={100}
                   aria-valuemin={0}
                   aria-valuemax={120}
@@ -365,7 +365,7 @@ function Rows(props) {
               </div>
             </div>
             <span className="ml-3 align-middle text-sm text-gray-500">
-              {(props.data.duration - props.data.duration % 60)/60} hour {props.data.duration%60} minutes
+              {(props?.data?.duration - props?.data?.duration % 60)/60} hour {props?.data?.duration%60} minutes
             </span>
           </div>
         </td>
@@ -390,9 +390,9 @@ function Rows(props) {
             // href="javascript:;"
             data-hs-overlay={
               "#" +
-              props.data.user.email
-                .split("@")[0]
-                .replaceAll(".", "")
+              props?.data?.user?.email
+                ?.split("@")[0]
+                ?.replaceAll(".", "")
             }
           >
             <div className="px-2 py-1.5">
@@ -413,16 +413,16 @@ function Rows(props) {
             </div>
           </a>
           <Model
-            id={props.data.user.email
-              .split("@")[0]
-              .replaceAll(".", "")}
-            name={props.data.user.name}
-            email={props.data.user.email}
-            status={props.data.status}
-            duration={props.data.duration}
-            date={props.date}
-            jointime={props.data.inoutTime ? props.data.inoutTime.split("-")[0]:""}
-            leavetime={props.data.inoutTime ? props.data.inoutTime.split("-")[1]:""}
+            id={props?.data?.user?.email
+              ?.split("@")[0]
+              ?.replaceAll(".", "")}
+            name={props?.data?.user?.name}
+            email={props?.data?.user?.email}
+            status={props?.data?.status}
+            duration={props?.data?.duration}
+            date={props?.date}
+            jointime={props?.data?.inoutTime ? props?.data?.inoutTime?.split("-")[0]:""}
+            leavetime={props?.data?.inoutTime ? props?.data?.inoutTime?.split("-")[1]:""}
           />
         </td>
       </tr>
@@ -433,7 +433,7 @@ function Rows(props) {
 function Model(props) {
   return (
     <div
-      id={props.id}
+      id={props?.id}
       className="hs-overlay hidden w-full h-full fixed top-0 left-0 z-[60] overflow-x-hidden overflow-y-auto"
     >
       <div className="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
@@ -503,9 +503,9 @@ function Model(props) {
           <div className="p-4 sm:p-7 overflow-y-auto">
             <div className="text-center">
               <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                {props.name}
+                {props?.name}
               </h3>
-              <p className="text-sm text-gray-500">{props.email}</p>
+              <p className="text-sm text-gray-500">{props?.email}</p>
             </div>
             {/* Grid */}
             <div className="mt-5 sm:mt-10 grid grid-cols-2 sm:grid-cols-3 gap-5">
@@ -523,7 +523,7 @@ function Model(props) {
                   Status:
                 </span>
                 <span className="block text-sm font-medium text-gray-800 dark:text-gray-200">
-                  {props.status}
+                  {props?.status}
                 </span>
               </div>
               {/* End Col */}
@@ -533,7 +533,7 @@ function Model(props) {
                 </span>
 
                 <span className="block text-sm font-medium text-gray-800 dark:text-gray-200">
-                  {(props.duration - props.duration%60)/60} hour {props.duration%60} minute
+                  {(props?.duration - props?.duration%60)/60} hour {props?.duration%60} minute
                 </span>
                 {/* <div className="flex items-center gap-x-2">
                 <svg
@@ -580,19 +580,19 @@ function Model(props) {
                 <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
                   <div className="flex items-center justify-between w-full">
                     <span>Date</span>
-                    <span>{props.date}</span>
+                    <span>{props?.date}</span>
                   </div>
                 </li>
                 <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
                   <div className="flex items-center justify-between w-full">
                     <span>Join Time</span>
-                    <span>{props.jointime}</span>
+                    <span>{props?.jointime}</span>
                   </div>
                 </li>
                 <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
                   <div className="flex items-center justify-between w-full">
                     <span>Leave Time</span>
-                    <span>{props.leavetime}</span>
+                    <span>{props?.leavetime}</span>
                   </div>
                 </li>
                 {/* <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-gray-50 border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-slate-800 dark:border-gray-700 dark:text-gray-200">

@@ -6,6 +6,7 @@ const HSThemeAppearance = {
     if (document.querySelector("html").classList.contains("dark")) return;
     this.setAppearance(theme);
   },
+
   _resetStylesOnLoad() {
     const $resetStyles = document.createElement("style");
     $resetStyles.innerText = `*{transition: unset !important;}`;
@@ -13,6 +14,7 @@ const HSThemeAppearance = {
     document.head.appendChild($resetStyles);
     return $resetStyles;
   },
+
   setAppearance(theme, saveInStore = true, dispatchEvent = true) {
     const $resetStylesEl = this._resetStylesOnLoad();
 
@@ -42,6 +44,7 @@ const HSThemeAppearance = {
       );
     }
   },
+
   getAppearance() {
     let theme = this.getOriginalAppearance();
     if (theme === "auto") {
@@ -102,7 +105,7 @@ const DarkLight = () => {
     <>
       <a
         // className="hs-dark-mode-active:hidden block hs-dark-mode group flex items-center text-gray-600 hover:text-blue-600 font-medium dark:text-gray-400 dark:hover:text-gray-500"
-        className="hs-dark-mode-active:hidden block hs-dark-mode group py-2.5 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition-all text-xs dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus-visible:ring-gray-700 dark:focus-visible:ring-offset-gray-800"
+        className="hs-dark-mode-active:hidden block hs-dark-mode group py-2.5 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition-all text-xs dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus-visible:ring-gray-700 dark:focus-visible:ring-offset-gray-800"
         data-hs-theme-click-value="dark"
       >
         <svg
@@ -118,7 +121,7 @@ const DarkLight = () => {
       </a>
       <a
         // className="hs-dark-mode-active:block hidden hs-dark-mode group flex items-center text-gray-600 hover:text-blue-600 font-medium dark:text-gray-400 dark:hover:text-gray-500"
-        className="hs-dark-mode-active:block hidden hs-dark-mode group py-2.5 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition-all text-xs dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus-visible:ring-gray-700 dark:focus-visible:ring-offset-gray-800"
+        className="hs-dark-mode-active:block hidden hs-dark-mode group py-2.5 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition-all text-xs dark:bg-gray-800 dark:hover:bg-slate-800 border-gray-500 dark:text-gray-400 dark:hover:text-white dark:focus-visible:ring-gray-700 dark:focus-visible:ring-offset-gray-800"
         data-hs-theme-click-value="light"
       >
         <svg

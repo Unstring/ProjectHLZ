@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 export default function  Foot(){ return(
-  <footer className="mt-auto w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto dark:bg-gray-900">
+  <footer className="mt-auto w-full  py-10 px-4 sm:px-6 lg:px-8 mx-auto dark:bg-gray-900">
   {/* Grid */}
   <div className="text-center">
     <div>

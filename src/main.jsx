@@ -10,6 +10,8 @@ import Details from './Details.jsx'
 import Nav from './common/Nav'
 import Foot from './common/Foot'
 import Error from "./Components/Error"
+import InputURL from "./Inputfiles/InputURL"
+import InputFile from "./Inputfiles/InputFile"
 
 
 const AppLayout = () => {
@@ -33,8 +35,12 @@ const router = createBrowserRouter([
         element: <List />,
       },
       {
-        path: "/details",
-        element: <Details />,
+        path: "/inputfile",
+        element: <InputFile />,
+      },
+      {
+        path: "/inputurl",
+        element: <InputURL />,
       },
     ],
   },
