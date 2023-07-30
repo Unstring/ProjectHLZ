@@ -50,28 +50,56 @@ export default function SheetJSReactAoO() {
     let url = "https://apiforjapa.dailywith.me/records/users";
     axios.get(url).then((response) => {
       response.data.records.forEach((e) => {
-        preusers.push(e.name);
+        // Push an object containing name and email to preusers array
+        preusers.push({ name: e.name, email: e.email });
       });
+  
       console.log(preusers);
+  
+      let masterData = []; // Create an array to hold the users to be added
+  
       fres.forEach((e) => {
         console.log(e["Name (Original Name)"]);
-        if (!preusers.includes(e["Name (Original Name)"])) {
+  
+        // Check if the name is available and not empty
+        let isNameAvailable = e["Name (Original Name)"] && e["Name (Original Name)"].trim() !== "";
+  
+        // Normalize email to null for users with undefined email
+        let email = e["User Email"] !== undefined ? e["User Email"] : null;
+  
+        // Check for duplicate user based on name and email
+        let isDuplicate = preusers.some(
+          (user) =>
+            isNameAvailable &&
+            user.name === e["Name (Original Name)"] &&
+            user.email === email
+        );
+  
+        if (!isDuplicate && isNameAvailable) {
           let data = {
             name: e["Name (Original Name)"],
-            email: e["User Email"],
+            email: email, // Use the normalized email value
           };
-          axios
-            .post(url, data)
-            .then((response) => {
-              console.log("Request successful!", response.data);
-            })
-            .catch((error) => {
-              console.error("Error submitting data:", error);
-            });
+          masterData.push(data); // Add the user to the master data array
         }
       });
+  
+      // Make a single POST request to add all the new users at once
+      axios
+        .post(url, masterData)
+        .then((response) => {
+          console.log("Request successful!", response.data);
+        })
+        .catch((error) => {
+          console.error("Error submitting data:", error);
+        });
     });
   }
+  
+  
+  
+  
+  
 
   // Custom function to parse the date string and return a valid Date object
   function parseDate(dateString) {
@@ -81,19 +109,42 @@ export default function SheetJSReactAoO() {
 
   function postInAttendance() {
     // Call the function to get the final attendance data
-  axios
-  .get("https://apiforjapa.dailywith.me/records/users")
-  .then((response) => {
-    let users = response.data.records;
-    const finalAttendanceData = registerAttendance(users, fres);
-    postAttendanceData(finalAttendanceData);
-  });
+    axios
+      .get("https://apiforjapa.dailywith.me/records/users")
+      .then((response) => {
+        let users = response.data.records;
+        const finalAttendanceData = registerAttendance(users, fres);
+
+        axios
+          .get("https://apiforjapa.dailywith.me/records/attendance")
+          .then((response) => {
+            const storedData = response.data.records;
+            postAttendanceData(finalAttendanceData, storedData);
+          })
+          .catch((error) => {
+            console.error("Error fetching stored data:", error.message);
+          });
+        // postAttendanceData(finalAttendanceData);
+      });
+  }
+
+  function formatDateToYmmdd(dateString) {
+    // Parse the date string using the Date constructor
+    const date = new Date(dateString);
+  
+    // Extract year, month, and day components
+    const year = date.getFullYear().toString().slice(-2); // Get the last two digits of the year
+    let month = (date.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if needed
+    let day = date.getDate().toString().padStart(2, '0'); // Add leading zero if needed
+  
+    // Concatenate the components to form the ymmdd format
+    return year + month + day;
   }
 
   function submitHandler() {
     postInMeeting();
     postInUsers();
-    postInAttendance();
+    // postInAttendance();
   }
 
   function filterUniqueUsers(usersArray) {
@@ -156,6 +207,7 @@ export default function SheetJSReactAoO() {
           attendance["User Email"] === user.email
       );
 
+      console.log(formatDateToYmmdd(finalAttendance[0]["inoutTime"].split(" - ")[0]))
       if (matchingAttendance) {
         // const { duration, inoutTime } = calculateDurationAndInOutTime(
         //   matchingAttendance["Join Time"],
@@ -164,7 +216,7 @@ export default function SheetJSReactAoO() {
 
         finalAttendance.push({
           user: user.id,
-          meeting: 30723, // Set the meeting ID accordingly
+        //   meeting: formatDateToYmmdd(finalAttendance[0]["Join Time"]), // Set the meeting ID accordingly
           duration: matchingAttendance["Duration (Minutes)"],
           status: "PRESENT",
           inoutTime: `${matchingAttendance["Join Time"]} - ${matchingAttendance["Leave Time"]}`,
@@ -172,7 +224,7 @@ export default function SheetJSReactAoO() {
       } else {
         finalAttendance.push({
           user: user.id,
-          meeting: 30723,
+        //   meeting: formatDateToYmmdd(finalAttendance[0]["inoutTime"]),
           duration: null,
           status: "ABSENT",
           inoutTime: null,
@@ -183,31 +235,61 @@ export default function SheetJSReactAoO() {
     return finalAttendance;
   }
 
-  async function postAttendanceData(finalAttendanceData) {
+  async function postAttendanceData(finalAttendanceData, storedData) {
+    // try {
+    //   const postRequests = finalAttendanceData.map((attendanceEntry) =>
+    //     axios.post('https://apiforjapa.dailywith.me/records/attendance', attendanceEntry)
+    //   );
+
+    //   const responses = await Promise.all(postRequests);
+    //   responses.forEach((response) => {
+    //     console.log('Attendance data posted successfully:', response.data);
+    //   });
+    // } catch (error) {
+    //   console.error('Error posting attendance data:', error.message);
+    // }
+
     try {
-      const postRequests = finalAttendanceData.map((attendanceEntry) =>
-        axios.post('https://apiforjapa.dailywith.me/records/attendance', attendanceEntry)
-      );
-  
-      const responses = await Promise.all(postRequests);
-      responses.forEach((response) => {
-        console.log('Attendance data posted successfully:', response.data);
-      });
+      for (const attendanceEntry of finalAttendanceData) {
+        const { user, meeting } = attendanceEntry;
+
+        // Check if the user and meeting combination is already present in the stored data
+        const isEntryAlreadyPosted = storedData.some(
+          (storedEntry) =>
+            storedEntry.user === user && storedEntry.meeting === meeting
+        );
+
+        if (!isEntryAlreadyPosted) {
+          try {
+            const response = await axios.post(
+              "https://apiforjapa.dailywith.me/records/attendance",
+              attendanceEntry
+            );
+            console.log("Attendance data posted successfully:", response.data);
+          } catch (error) {
+            console.error("Error posting attendance data:", error.message);
+          }
+        } else {
+          console.log(
+            `Attendance data for user ${user} and meeting ${meeting} already exists. Skipping...`
+          );
+        }
+      }
     } catch (error) {
-      console.error('Error posting attendance data:', error.message);
+      console.error("Error checking existing data:", error.message);
     }
   }
 
   // Call the function to get the final attendance data
-//   axios
-//     .get("https://apiforjapa.dailywith.me/records/users")
-//     .then((response) => {
-//       let users = response.data.records;
-//       const finalAttendanceData = registerAttendance(users, fres);
-//       postAttendanceData(finalAttendanceData);
-//     });
+  //   axios
+  //     .get("https://apiforjapa.dailywith.me/records/users")
+  //     .then((response) => {
+  //       let users = response.data.records;
+  //       const finalAttendanceData = registerAttendance(users, fres);
+  //       postAttendanceData(finalAttendanceData);
+  //     });
 
-  //   console.log(fres);
+    // console.log(fres);
   //   console.log(pres);
 
   return (
