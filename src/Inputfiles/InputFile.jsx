@@ -133,7 +133,7 @@ export default function SheetJSReactAoO() {
       // Create a map of user objects with 'name-email' as the key
       const userMap = new Map();
       for (const user of users) {
-        const key = `${user.name}-${user.email || ""}`;
+        const key = `${user.name}-${user.email}`;
         userMap.set(key, user);
       }
 
@@ -144,20 +144,38 @@ export default function SheetJSReactAoO() {
       const finalAttendanceData = [];
 
       for (const user of users) {
-        const key = `${user.name}-${user.email || ""}`;
-        const isUserPresentInFres = fres.some(
-          (data) =>
-            data["Name (Original Name)"] === user.name &&
-            data["User Email"] === user.email
-        );
+        // console.log();
+
+        // const key = `${user.name}-${user.email || ""}`;
+        const isUserPresentInFres = fres.some((data) => {
+          // console.log(data["User Email"]);
+          if (data["User Email"] != undefined) {
+            return (
+              data["Name (Original Name)"] === user.name &&
+              data["User Email"] === user.email
+            );
+          } else {
+            return (
+              data["Name (Original Name)"] === user.name && user.email === null
+            );
+          }
+        });
 
         if (isUserPresentInFres) {
           // User is present in fres, so mark as PRESENT and add duration and inoutTime
-          const dataInFres = fres.find(
-            (data) =>
-              data["Name (Original Name)"] === user.name &&
-              data["User Email"] === user.email
-          );
+          const dataInFres = fres.find((data) => {
+            if (data["User Email"] != undefined) {
+              return (
+                data["Name (Original Name)"] === user.name &&
+                data["User Email"] === user.email
+              );
+            } else {
+              return (
+                data["Name (Original Name)"] === user.name &&
+                user.email === null
+              );
+            }
+          });
 
           // Remove the first 9 characters from joinTime and leaveTime
           const joinTime = dataInFres["Join Time"].substring(9);
@@ -182,6 +200,15 @@ export default function SheetJSReactAoO() {
         }
       }
 
+      // axios
+      //   .post("https://apiforjapa.dailywith.me/records/attendance", finalAttendanceData)
+      //   .then((response) => {
+      //     console.log("Attendance data posted successfully:", response.data);
+      //   });
+
+      console.log(users);
+      console.log("final attendance data:",finalAttendanceData);
+
       // Fetch stored data from the API
       const storedDataResponse = await axios.get(
         "https://apiforjapa.dailywith.me/records/attendance"
@@ -190,44 +217,72 @@ export default function SheetJSReactAoO() {
 
       // Create master data with unique entries that are not already in the stored data
       const masterData = [];
-      const processedMasterEntries = new Set();
+      // const processedMasterEntries = new Set();
 
-      for (const attendanceEntry of finalAttendanceData) {
-        const { user, meeting } = attendanceEntry;
-        const key = `${user}-${meeting}`;
+      // for (const attendanceEntry of finalAttendanceData) {
+      //   const { user, meeting } = attendanceEntry;
+      //   const key = `${user}-${meeting}`;
+      
+      //   if (!processedMasterEntries.has(key)) {
+      //     processedMasterEntries.add(key);
+      
+      //     // Check if the user and meeting combination is already present in the stored data
+      //     const isEntryAlreadyPosted = storedData.some(
+      //       (storedEntry) =>
+      //         storedEntry.user === user && storedEntry.meeting === meeting
+      //     );
+      
+      //     if (!isEntryAlreadyPosted) {
+      //       masterData.push(attendanceEntry);
+      //     } else {
+      //       console.log(
+      //         `Attendance data for user ${user} and meeting ${meeting} already exists. Skipping...`
+      //       );
+      //     }
+      //   }
+      // }
 
-        if (!processedMasterEntries.has(key)) {
-          processedMasterEntries.add(key);
 
-          // Check if the user and meeting combination is already present in the stored data
-          const isEntryAlreadyPosted = storedData.some(
-            (storedEntry) =>
-              storedEntry.user === user && storedEntry.meeting === meeting
-          );
 
-          if (!isEntryAlreadyPosted) {
-            masterData.push(attendanceEntry);
-          } else {
-            console.log(
-              `Attendance data for user ${user} and meeting ${meeting} already exists. Skipping...`
-            );
-          }
+      const uniqueSecondArray = [];
+      console.log("uniq arr",uniqueSecondArray);
+      console.log("stored",storedData)
+      console.log("final attendance data",finalAttendanceData);
+
+      for (const secondItem of finalAttendanceData) {
+        const existsInFirstArray = storedData.some(firstItem =>
+          firstItem.user === secondItem.user && firstItem.meeting === secondItem.meeting
+        );
+      
+        if (!existsInFirstArray) {
+          uniqueSecondArray.push(secondItem);
         }
       }
+      
+      console.log("uniq arr",uniqueSecondArray);
 
-      console.log(masterData);
+      // console.log("master",masterData);
 
       // Post the master data to the database
       if (masterData.length > 0) {
-        masterData.forEach(record => {
-            
-            axios.post(
-              "https://apiforjapa.dailywith.me/records/attendance",
-              record
-            ).then(response=>{
-                console.log("Attendance data posted successfully:", response.data);
-            });
-        });
+        // masterData.forEach((record) => {
+        //   axios
+        //     .post("https://apiforjapa.dailywith.me/records/attendance", record)
+        //     .then((response) => {
+        //       console.log(
+        //         "Attendance data posted successfully:",
+        //         response.data
+        //       );
+        //     });
+        // });
+        // axios
+        //   .post(
+        //     "https://apiforjapa.dailywith.me/records/attendance",
+        //     masterData
+        //   )
+        //   .then((response) => {
+        //     console.log("Attendance data posted successfully:", response.data);
+        //   });
       } else {
         console.log("No new attendance data to post.");
       }
@@ -246,8 +301,8 @@ export default function SheetJSReactAoO() {
   }
 
   function submitHandler() {
-    postInMeeting();
-    postInUsers();
+    // postInMeeting();
+    // postInUsers();
     postAttendanceDataToDatabase();
     // postInAttendance();
   }
@@ -392,8 +447,8 @@ export default function SheetJSReactAoO() {
   //       postAttendanceData(finalAttendanceData);
   //     });
 
-  console.log(fres);
-  //   console.log(pres);
+  // console.log(fres.length > 0?fres[2]["User Email"]:"not there");
+  // console.log(fres);
 
   return (
     <div>
