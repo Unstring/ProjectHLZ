@@ -200,42 +200,8 @@ export default function SheetJSReactAoO() {
         }
       }
 
-      // axios
-      //   .post("https://apiforjapa.dailywith.me/records/attendance", finalAttendanceData)
-      //   .then((response) => {
-      //     console.log("Attendance data posted successfully:", response.data);
-      //   });
-
       console.log(users);
       console.log("final attendance data:", finalAttendanceData);
-
-      // Fetch stored data from the API
-      // const storedDataResponse = await axios.get(
-      //   "https://apiforjapa.dailywith.me/records/attendance"
-      // );
-      // const storedData = storedDataResponse.data.records;
-
-      // // console.log("uniq arr",uniqueSecondArray);
-      // console.log("stored",storedData)
-      // console.log("final attendance data",finalAttendanceData);
-
-      // // for (const secondItem of finalAttendanceData) {
-      // //   const existsInFirstArray = storedData.some(firstItem =>
-      // //     firstItem.user === secondItem.user && firstItem.meeting === secondItem.meeting
-      // //   );
-
-      // //   if (!existsInFirstArray) {
-      // //     uniqueSecondArray.push(secondItem);
-      // //   }
-      // // }
-
-      // let uniqueSecondArray = finalAttendanceData.filter(secondItem => {
-      //   return !storedData.some(firstItem =>
-      //     firstItem.user === secondItem.user && firstItem.meeting === secondItem.meeting
-      //   );
-      // });
-
-      // console.log("uniq arr",uniqueSecondArray);
 
       const storedDataResponse = await axios.get(
         "https://apiforjapa.dailywith.me/records/attendance"
@@ -261,24 +227,14 @@ export default function SheetJSReactAoO() {
 
       console.log("uniq arr", uniqueSecondArray);
 
-      // const storedDataResponse = await axios.get(
-      //   "https://apiforjapa.dailywith.me/records/attendance"
-      // );
-      // const storedData = storedDataResponse.data.records;
 
-      // console.log("stored", storedData);
-      // console.log("final attendance data", finalAttendanceData);
-
-      // const uniqueSecondArray = finalAttendanceData.filter((secondItem) => {
-      //   return !storedData.some(
-      //     (firstItem) =>{
-      //       console.log(firstItem.user === secondItem.user);
-      //       return(firstItem.user === secondItem.user &&
-      //       firstItem.meeting === secondItem.meeting)
-      //     });
-      // });
-
-      // console.log("uniq arr", uniqueSecondArray);
+      if (uniqueSecondArray.length > 0) {
+        axios
+        .post("https://apiforjapa.dailywith.me/records/attendance", uniqueSecondArray)
+        .then((response) => {
+          console.log("Attendance data posted successfully:", response.data);
+        });
+      }
     } catch (error) {
       console.error("Error processing attendance data:", error.message);
     }
