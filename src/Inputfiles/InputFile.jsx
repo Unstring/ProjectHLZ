@@ -250,8 +250,8 @@ export default function SheetJSReactAoO() {
   }
 
   function submitHandler() {
-    // postInMeeting();
-    // postInUsers();
+    postInMeeting();
+    postInUsers();
     postAttendanceDataToDatabase();
     // postInAttendance();
   }
