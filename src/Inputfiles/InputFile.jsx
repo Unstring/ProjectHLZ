@@ -207,85 +207,78 @@ export default function SheetJSReactAoO() {
       //   });
 
       console.log(users);
-      console.log("final attendance data:",finalAttendanceData);
+      console.log("final attendance data:", finalAttendanceData);
 
       // Fetch stored data from the API
+      // const storedDataResponse = await axios.get(
+      //   "https://apiforjapa.dailywith.me/records/attendance"
+      // );
+      // const storedData = storedDataResponse.data.records;
+
+      // // console.log("uniq arr",uniqueSecondArray);
+      // console.log("stored",storedData)
+      // console.log("final attendance data",finalAttendanceData);
+
+      // // for (const secondItem of finalAttendanceData) {
+      // //   const existsInFirstArray = storedData.some(firstItem =>
+      // //     firstItem.user === secondItem.user && firstItem.meeting === secondItem.meeting
+      // //   );
+
+      // //   if (!existsInFirstArray) {
+      // //     uniqueSecondArray.push(secondItem);
+      // //   }
+      // // }
+
+      // let uniqueSecondArray = finalAttendanceData.filter(secondItem => {
+      //   return !storedData.some(firstItem =>
+      //     firstItem.user === secondItem.user && firstItem.meeting === secondItem.meeting
+      //   );
+      // });
+
+      // console.log("uniq arr",uniqueSecondArray);
+
       const storedDataResponse = await axios.get(
         "https://apiforjapa.dailywith.me/records/attendance"
       );
       const storedData = storedDataResponse.data.records;
 
-      // Create master data with unique entries that are not already in the stored data
-      const masterData = [];
-      // const processedMasterEntries = new Set();
+      console.log("stored", storedData);
+      console.log("final attendance data", finalAttendanceData);
 
-      // for (const attendanceEntry of finalAttendanceData) {
-      //   const { user, meeting } = attendanceEntry;
-      //   const key = `${user}-${meeting}`;
-      
-      //   if (!processedMasterEntries.has(key)) {
-      //     processedMasterEntries.add(key);
-      
-      //     // Check if the user and meeting combination is already present in the stored data
-      //     const isEntryAlreadyPosted = storedData.some(
-      //       (storedEntry) =>
-      //         storedEntry.user === user && storedEntry.meeting === meeting
-      //     );
-      
-      //     if (!isEntryAlreadyPosted) {
-      //       masterData.push(attendanceEntry);
-      //     } else {
-      //       console.log(
-      //         `Attendance data for user ${user} and meeting ${meeting} already exists. Skipping...`
-      //       );
-      //     }
-      //   }
-      // }
+      const uniqueSecondMap = new Map();
 
-
-
-      const uniqueSecondArray = [];
-      console.log("uniq arr",uniqueSecondArray);
-      console.log("stored",storedData)
-      console.log("final attendance data",finalAttendanceData);
-
-      for (const secondItem of finalAttendanceData) {
-        const existsInFirstArray = storedData.some(firstItem =>
-          firstItem.user === secondItem.user && firstItem.meeting === secondItem.meeting
-        );
-      
-        if (!existsInFirstArray) {
-          uniqueSecondArray.push(secondItem);
-        }
+      for (const item of finalAttendanceData) {
+        const key = `${item.user}-${item.meeting}`;
+        uniqueSecondMap.set(key, item);
       }
-      
-      console.log("uniq arr",uniqueSecondArray);
 
-      // console.log("master",masterData);
-
-      // Post the master data to the database
-      if (masterData.length > 0) {
-        // masterData.forEach((record) => {
-        //   axios
-        //     .post("https://apiforjapa.dailywith.me/records/attendance", record)
-        //     .then((response) => {
-        //       console.log(
-        //         "Attendance data posted successfully:",
-        //         response.data
-        //       );
-        //     });
-        // });
-        // axios
-        //   .post(
-        //     "https://apiforjapa.dailywith.me/records/attendance",
-        //     masterData
-        //   )
-        //   .then((response) => {
-        //     console.log("Attendance data posted successfully:", response.data);
-        //   });
-      } else {
-        console.log("No new attendance data to post.");
+      for (const item of storedData) {
+        const key = `${item.user}-${item.meeting}`;
+        uniqueSecondMap.delete(key);
       }
+
+      const uniqueSecondArray = Array.from(uniqueSecondMap.values());
+
+      console.log("uniq arr", uniqueSecondArray);
+
+      // const storedDataResponse = await axios.get(
+      //   "https://apiforjapa.dailywith.me/records/attendance"
+      // );
+      // const storedData = storedDataResponse.data.records;
+
+      // console.log("stored", storedData);
+      // console.log("final attendance data", finalAttendanceData);
+
+      // const uniqueSecondArray = finalAttendanceData.filter((secondItem) => {
+      //   return !storedData.some(
+      //     (firstItem) =>{
+      //       console.log(firstItem.user === secondItem.user);
+      //       return(firstItem.user === secondItem.user &&
+      //       firstItem.meeting === secondItem.meeting)
+      //     });
+      // });
+
+      // console.log("uniq arr", uniqueSecondArray);
     } catch (error) {
       console.error("Error processing attendance data:", error.message);
     }
